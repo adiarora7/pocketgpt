@@ -6,8 +6,8 @@ import os
 import openai
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-#openai.api_key = "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"
+#openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = "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"
 
 
 #below is og code
