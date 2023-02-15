@@ -20,7 +20,7 @@ def chatgpt():
     inb_num = request.form['From']
     if verify_number(inb_num) == False:
         resp = MessagingResponse()
-        resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at pocket-gpt.com/free-signup")
+        resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at https://pocket-gpt.com/free-signup/")
         return str(resp)
     
     else:
