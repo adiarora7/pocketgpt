@@ -34,7 +34,7 @@ def chatgpt():
         """get incoming message"""
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
-        prompt_text = f'{restart_sequence}: {inb_msg}{start_sequence}'
+        prompt_text = f'{session_prompt}: {inb_msg}{start_sequence}'
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=prompt_text,
