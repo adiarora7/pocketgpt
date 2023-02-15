@@ -4,7 +4,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 #from random import choice
 from dotenv import load_dotenv
 import openai
-from verification import verify_number
+from verification import verify_number, update_list
 
 load_dotenv()
 #openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -16,9 +16,12 @@ app = Flask(__name__)
 
 @app.route("/sms", methods=['POST'])
 def chatgpt():
+    
+    """Update list"""
+    data= update_list()
     """Check incoming number"""
     inb_num = request.form['From']
-    if verify_number(inb_num) == False:
+    if verify_number(inb_num, data) == False:
         resp = MessagingResponse()
         resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at https://pocket-gpt.com/free-signup/")
         return str(resp)
