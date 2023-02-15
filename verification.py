@@ -1,16 +1,36 @@
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+import os
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
-# use your Google credentials to authorize access to your Google Sheet
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('path/to/credentials.json', scope)
-client = gspread.authorize(creds)
+# Set the path to the service account key file
+KEY_PATH = '/Users/adiarora/Downloads/pocketgpt-81dc23062dda.json'
 
-# open the Google Sheet containing the numbers
-sheet = client.open("Your Sheet Name").sheet1
+# Set the ID of the spreadsheet you want to access
+SPREADSHEET_ID = '1_YyNmPJyLpFaNhQTkuXlD98EcK5pRZqmC6fgYGroBcI'
 
-# get all the numbers from the first column
-numbers = sheet.col_values(1)
+# Authenticate using the service account
+creds = service_account.Credentials.from_service_account_file(KEY_PATH, scopes=['https://www.googleapis.com/auth/spreadsheets.readonly'])
 
-# convert the numbers from string to integer
-numbers = [int(x) for x in numbers]
+# Build the Sheets API client
+service = build('sheets', 'v4', credentials=creds)
+
+# range of cells to retrieve (in this case, all cells in Column 1)
+range_name = 'Sheet1!A:A'
+
+# Make the API request to retrieve the cell values
+result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=range_name).execute()
+values = result.get('values', [])
+
+# Print the values
+#if not values:
+#    print('No data found.')
+#else:
+#    print('User Phone Numbers:')
+    #outputs values from Column 1 in google sheets
+values = [[int(item) for item in inner_list] for inner_list in values[1:]]
+
+def verify_number(incoming_number):
+    if int(incoming_number) in values:
+        return True
+    else:
+        return False
