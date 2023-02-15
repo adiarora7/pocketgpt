@@ -34,13 +34,12 @@ def chatgpt():
         """get incoming message"""
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
-        prompt_text = inb_msg
+        #prompt_text = inb_msg
         response = openai.Completion.create(
             model="text-davinci-003",
-            prompt=prompt_text,
+            prompt=inb_msg,
             max_tokens=3000,
             temperature=0.7,
-            stop=["\n"]
         )
         """Respond to incoming calls with a simple text message."""
     # Start our TwiML response
