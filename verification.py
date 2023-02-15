@@ -26,6 +26,9 @@ values = result.get('values', [])
 #    print('No data found.')
 #else:
 #    print('User Phone Numbers:')
+
+#add a 1 to the beginning of each number
+values = [[str('1') + item for item in inner_list] for inner_list in values]
     #outputs values from Column 1 in google sheets
 values = [[int(item) for item in inner_list] for inner_list in values[1:]]
 
