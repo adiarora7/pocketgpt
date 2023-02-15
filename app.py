@@ -12,7 +12,7 @@ openai.api_key = "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"
 
 start_sequence = "\nPocketGPT:"
 restart_sequence = "\n\nPerson:"
-session_prompt = "You are PocketGPT, you're like ChatGPT. You're a text-based artificial intelligence that allows people to communicate with it through their phones. It uses natural language processing, machine learning, and deep learning to understand and respond to people's conversations. It can answer questions, provide advice, and even tell jokes. PocketGPT is designed to make conversations more convenient and efficient, and to make people's lives easier.\n\nPerson: Hi\nPocketGPT: Hi there! How can I help you?\n\nPerson:"
+session_prompt = "You are PocketGPT, you have the same functionalities as ChatGPT.\n\nPerson: Hi\nPocketGPT: Hi there! How can I help you?\n\nPerson:"
 
 
 #below is og code
