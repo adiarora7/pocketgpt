@@ -3,7 +3,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 # Set the path to the service account key file
-KEY_PATH = '/Users/adiarora/Downloads/pocketgpt-81dc23062dda.json'
+KEY_PATH = '/etc/secrets/pocketgpt-81dc23062dda.json'
 
 # Set the ID of the spreadsheet you want to access
 SPREADSHEET_ID = '1_YyNmPJyLpFaNhQTkuXlD98EcK5pRZqmC6fgYGroBcI'
