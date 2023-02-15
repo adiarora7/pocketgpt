@@ -32,8 +32,9 @@ values = [[str('1') + item for item in inner_list] for inner_list in values]
     #outputs values from Column 1 in google sheets
 values = [[int(item) for item in inner_list] for inner_list in values[1:]]
 
+""" Checks if input is in list of numbers that are signed up"""
 def verify_number(incoming_number):
-    if int(incoming_number) in values:
+    if int(incoming_number) in [integer for inner_list in values for integer in inner_list]:
         return True
     else:
         return False
