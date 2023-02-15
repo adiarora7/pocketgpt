@@ -10,8 +10,8 @@ load_dotenv()
 #openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_key = "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"
 
-start_sequence = "\nPocketGPT:"
-restart_sequence = "\n\nPerson:"
+#start_sequence = "\nPocketGPT:"
+#restart_sequence = "\n\nPerson:"
 session_prompt = "You are PocketGPT, you have the same functionalities as ChatGPT.\n\nPerson: Hi\nPocketGPT: Hi there! How can I help you?\n\nPerson:"
 
 
@@ -34,7 +34,7 @@ def chatgpt():
         """get incoming message"""
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
-        prompt_text = f'{session_prompt}: {inb_msg}'
+        prompt_text = inb_msg
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=prompt_text,
