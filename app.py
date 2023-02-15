@@ -10,6 +10,10 @@ load_dotenv()
 #openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_key = "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"
 
+start_sequence = "\nPocketGPT:"
+restart_sequence = "\n\nPerson:"
+session_prompt = "You are PocketGPT, you're like ChatGPT. You're a text-based artificial intelligence that allows people to communicate with it through their phones. It uses natural language processing, machine learning, and deep learning to understand and respond to people's conversations. It can answer questions, provide advice, and even tell jokes. PocketGPT is designed to make conversations more convenient and efficient, and to make people's lives easier.\n\nPerson: Hi\nPocketGPT: Hi there! How can I help you?\n\nPerson:"
+
 
 #below is og code
 app = Flask(__name__)
@@ -30,11 +34,13 @@ def chatgpt():
         """get incoming message"""
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
+        prompt_text = f'{restart_sequence}: {inb_msg}{start_sequence}'
         response = openai.Completion.create(
             model="text-davinci-003",
-            prompt=inb_msg,
+            prompt=prompt_text,
             max_tokens=3000,
-            temperature=0.7
+            temperature=0.7,
+            stop=["\n"]
         )
         """Respond to incoming calls with a simple text message."""
     # Start our TwiML response
