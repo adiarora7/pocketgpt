@@ -46,8 +46,8 @@ def chatgpt():
                 temperature=0.1,
             )
         else:
+            print('using temp 0.7')
             response = openai.Completion.create(
-                print('using temp 0.7')
                 model="text-davinci-003",
                 prompt=inb_msg,
                 max_tokens=3000,
