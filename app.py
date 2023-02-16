@@ -40,7 +40,7 @@ def chatgpt():
             model="text-davinci-003",
             prompt=inb_msg,
             max_tokens=3000,
-            temperature=0.4,
+            temperature=0.0,
         )
         """Respond to incoming calls with a simple text message."""
     # Start our TwiML response
