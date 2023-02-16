@@ -38,7 +38,7 @@ def chatgpt():
         temp = 0.7
         if (inb_msg == 'hey') or (inb_msg == 'hello') or (inb_msg == 'hi') or (inb_msg == 'hey there!'):
             resp = MessagingResponse()
-            resp.message("Hey Adi it's working")
+            resp.message("Hey there! How can I help you?")
             return str(resp)
         else:
             #prompt_text = inb_msg
