@@ -37,10 +37,10 @@ def chatgpt():
         print(inb_msg)
         #prompt_text = inb_msg
         
-        greetings_list = ['hey', 'hello', 'hi', 'hi there', 'hey pocketgpt', 'hi pocketgpt','hey!', 'hello!', 'hi!', 'hi there!', 'hey pocketgpt!', 'hi pocketgpt!', 'hey.', 'hello.', 'hi.', 'hi there.', 'hey pocketgpt.', 'hi pocketgpt.']
+        greetings_list = ["hey", "hello", "hi", "hi there", "hey pocketgpt", "hi pocketgpt","hey!", "hello!", "hi!", "hi there!", "hey pocketgpt!", "hi pocketgpt!", "hey.", "hello.","hi.", "hi there.", "hey pocketgpt.", "hi pocketgpt."]
         greeting = False
-        for i in greetings_list:
-            if inb_msg == greetings_list[i]:
+        for word in greetings_list:
+            if inb_msg == greetings_list[word]:
                 greeting = True 
                 
         if greeting:
