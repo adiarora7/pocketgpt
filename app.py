@@ -24,13 +24,14 @@ def chatgpt():
     """Update list"""
     data= update_list()
     """Check incoming number"""
-    inb_num = request.form['From']
-    if verify_number(inb_num, data) == False:
-        resp = MessagingResponse()
-        resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at https://pocket-gpt.com/free-signup/")
-        return str(resp)
     
-    else:
+    inb_num = request.form['From']
+    #if verify_number(inb_num, data) == False:
+        #resp = MessagingResponse()
+       # resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at https://pocket-gpt.com/free-signup/")
+        #return str(resp)
+    
+    if int(inb_num)==17787107707:
         """get incoming message"""
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
@@ -48,6 +49,16 @@ def chatgpt():
         resp.message(response["choices"][0]["text"])
         print(response["choices"][0]["text"])
 
+        return str(resp)
+    
+    elif verify_number(inb_num, data) == True:
+        resp = MessagingResponse()
+        resp.message("Hi, we appreciate you using PocketGPT! We appreciate your patience as we refine the model. PocketGPT will be up soon.")
+        return str(resp)
+    
+    else:
+        resp = MessagingResponse()
+        resp.message("Hi! You're not currently signed up for PocketGPT. To be notified about the release of PocketGPT, sign up at https://pocket-gpt.com/free-signup/")
         return str(resp)
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 def update_list():
 # Set the path to the service account key file
     KEY_PATH = '/etc/secrets/pocketgpt-81dc23062dda.json'
-
+#KEY_PATH = '/Users/adiarora/Downloads/pocketgpt-81dc23062dda.json'
 # Set the ID of the spreadsheet you want to access
     SPREADSHEET_ID = '1_YyNmPJyLpFaNhQTkuXlD98EcK5pRZqmC6fgYGroBcI'
 
@@ -22,6 +22,7 @@ def update_list():
     result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=range_name).execute()
     values = result.get('values', [])
 
+
 # Print the values
 #if not values:
 #    print('No data found.')
@@ -32,7 +33,7 @@ def update_list():
     values = [[str('1') + item for item in inner_list] for inner_list in values]
     #outputs values from Column 1 in google sheets
     values = [[int(item) for item in inner_list] for inner_list in values[1:]]
-    
+#print(values)
     return values
 
 """ Checks if input is in list of numbers that are signed up"""
