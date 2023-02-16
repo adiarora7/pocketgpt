@@ -36,8 +36,14 @@ def chatgpt():
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
         #prompt_text = inb_msg
+        
         greetings_list = ['hey', 'hello', 'hi', 'hi there', 'hey pocketgpt', 'hi pocketgpt','hey!', 'hello!', 'hi!', 'hi there!', 'hey pocketgpt!', 'hi pocketgpt!', 'hey.', 'hello.', 'hi.', 'hi there.', 'hey pocketgpt.', 'hi pocketgpt.']
-        if str(inb_msg) in [greetings_list]:
+        greeting = False
+        for i in greetings_list:
+            if inb_msg == greetings_list[i]:
+                greeting = True 
+                
+        if greeting:
             print('using temp 0.1')
             response = openai.Completion.create(
                 model="text-davinci-003",
