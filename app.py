@@ -35,30 +35,16 @@ def chatgpt():
         """get incoming message"""
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
+        temp = 0.7
+        if inb_msg == 'hey':
+            temp = 0.1
         #prompt_text = inb_msg
-        
-        greetings_list = ["hey", "hello", "hi", "hi there", "hey pocketgpt", "hi pocketgpt","hey!", "hello!", "hi!", "hi there!", "hey pocketgpt!", "hi pocketgpt!", "hey.", "hello.","hi.", "hi there.", "hey pocketgpt.", "hi pocketgpt."]
-        greeting = False
-        for word in greetings_list:
-            if inb_msg == greetings_list[word]:
-                greeting = True 
-                
-        if greeting:
-            print('using temp 0.1')
-            response = openai.Completion.create(
-                model="text-davinci-003",
-                prompt=inb_msg,
-                max_tokens=3000,
-                temperature=0.1,
-            )
-        else:
-            print('using temp 0.7')
-            response = openai.Completion.create(
-                model="text-davinci-003",
-                prompt=inb_msg,
-                max_tokens=3000,
-                temperature=0.7,
-            )
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=inb_msg,
+            max_tokens=3000,
+            temperature=temp,
+        )
         """Respond to incoming calls with a simple text message."""
     # Start our TwiML response
         resp = MessagingResponse()
