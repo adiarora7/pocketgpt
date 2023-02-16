@@ -37,7 +37,7 @@ def chatgpt():
         print(inb_msg)
         #prompt_text = inb_msg
         greetings_list = ['hey', 'hello', 'hi', 'hi there', 'hey pocketgpt', 'hi pocketgpt','hey!', 'hello!', 'hi!', 'hi there!', 'hey pocketgpt!', 'hi pocketgpt!', 'hey.', 'hello.', 'hi.', 'hi there.', 'hey pocketgpt.', 'hi pocketgpt.']
-        if inb_msg in [greetings_list]:
+        if str(inb_msg) in [greetings_list]:
             print('using temp 0.1')
             response = openai.Completion.create(
                 model="text-davinci-003",
