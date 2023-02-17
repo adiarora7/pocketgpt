@@ -28,8 +28,9 @@ def chatgpt():
     inb_num = request.form['From']
     if verify_number(inb_num, data) == False:
         resp = MessagingResponse()
-        resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at https://pocket-gpt.com/free-signup/")
-        #return str(resp)
+        #resp.message("Hi! You're not currently signed up for PocketGPT. To access PocketGPT, sign up for free at https://pocket-gpt.com/free-signup/")
+        resp.message("Hi! You're not currently signed up for PocketGPT. Sign up to be notified of the release at pocket-gpt.com/coming-soon")
+        return str(resp)
     
     else:
         """get incoming message"""
