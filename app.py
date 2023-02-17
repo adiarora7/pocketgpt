@@ -46,7 +46,7 @@ def chatgpt():
             response = openai.Completion.create(
                 model="text-davinci-003",
                 prompt=inb_msg,
-                max_tokens=3000,
+                max_tokens=2000,
                 temperature=temp,
             )
         """Respond to incoming calls with a simple text message."""
