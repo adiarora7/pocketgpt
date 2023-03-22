@@ -5,45 +5,40 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 load_dotenv()
-openai.api_key = "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"
 
-start_sequence = "\nAI:"
-restart_sequence = "\nMe:"
-session_prompt =  "Me: Hey\nAI: Hey there! How can I help you?"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def ask(question, chat_log=None):
-    prompt_text = f'{session_prompt}{chat_log}{restart_sequence} {question}{start_sequence}'
-    response = openai.Completion.create(
-      engine="text-davinci-003",
-      prompt=prompt_text,
-      temperature=0.66,
-      max_tokens=3000,
-      top_p=1,
-      frequency_penalty=0,
-      presence_penalty=0.3,
-      stop=["\nMe:"],
+session_prompt =  {"role":"system", "content": "You are a helpful assistant."}
+initial_user = {"role": "user", "content": "Who won the world series in 2020?"}
+initial_ai = {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."}
+
+def set_system(messages):
+    if messages is None:
+        messages=[session_prompt, initial_user, initial_ai]
+    return messages
+
+def ask(messages):
+    completion = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=messages
     )
-    reply = response['choices'][0]['text']
+    
+    reply = completion['choices'][0]['message']['content']
     print(str(reply))
     return str(reply)
 
-def append_interaction_to_chat_log(question, answer, chat_log=None):
-    #creating a string literal by concatenating '\nMe: + question + '\nAI: + response
-    return f'{chat_log}{restart_sequence} {question}{start_sequence}{answer}'
+def create_msg_object(role, content):
+    #creating a msg object to be appended to messages
+    msg_object = {"role": role, "content": content}
+    return msg_object
 
 
-def trim_chat_log(chat_log=None):
-    if chat_log is None:
-        return ''
-    #split string into list of messages
-    messages = chat_log.split('\n')
-    #if length is greater than or equal to 6(3 interactions), get rid of the oldest interaction
-    if len(messages) >= 6:
-        messages = messages[1:]
-        chatlog = "\n".join(messages)
-        print(chatlog)
-        return chatlog
-    return chat_log
+def trim_messages(messages):
+    #if there are >9 messages then remove oldest interaction
+    if len(messages) >= 9:
+        messages = messages[:1]+messages[3:]
+        
+    return messages
 
 def update_list():
 # Set the path to the service account key file

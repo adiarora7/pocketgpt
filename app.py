@@ -21,7 +21,7 @@ def chatgpt():
     inb_num = request.form['From']
     if verify_number(inb_num, data) == False:
         resp = MessagingResponse()
-        resp.message("Hi! You're not currently signed up for PocketGPT. Sign up to be notified of the release at pocket-gpt.com/coming-soon")
+        resp.message("Hi! You're not currently signed up for PocketGPT. You can register at pocket-gpt.com")
         return str(resp)
     
 #READ MESSAGE AND CREATE&SEND RESPONSE
@@ -30,36 +30,33 @@ def chatgpt():
         inb_msg = request.form['Body'].lower()
         print(inb_msg)
         
-        """if inb_msg is greeting"""
-        if inb_msg in greetings:
-            resp = MessagingResponse()
-            reply = "Hey there! How can I help you?"
-            resp.message(reply)
-            print (resp)
-            return str(resp)
+        #get chatlog
+        messages = session.get('chat_log')
+        messages = set_system(messages)
+        #create question object
+        question = create_msg_object("user", inb_msg)
+        #append question object to messages
+        messages.append(question)
+        #ask for response 
+        response = ask(messages)
+        #create reply object
+        reply = create_msg_object("assistant", response)
+        #append reply object to messages
+        messages.append(reply)
+        #update session variable
+        session['chat_log'] = messages
         
-        else:
-            """otherwise generate reply"""
-            #get chatlog
-            chat_log = session.get('chat_log')
-            #ask for response 
-            response = ask(inb_msg, chat_log)
-            #set chatlog to chatlog + question + response
-            session['chat_log'] = append_interaction_to_chat_log(inb_msg,
-                                    response,
-                                    chat_log)
-            
-            #print chatlog
-            chat_log = session.get('chat_log')
-            session['chat_log'] = trim_chat_log(chat_log)
-            
+        #trim messages if there are over 9 saved messages
+        messages = session.get('chat_log')
+        session['chat_log'] = trim_messages(messages)
+        
 
-            #print(session['chat_log'])
-            
-            resp = MessagingResponse()
-            resp.message(response)
-            
-            return str(resp)
+        #print(session['chat_log'])
+        
+        resp = MessagingResponse()
+        resp.message(response)
+        
+        return str(resp)
 
 if __name__ == "__main__":
     app.run(debug=True)
