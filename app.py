@@ -1,6 +1,6 @@
 from flask import Flask, request, session
 from twilio.twiml.messaging_response import MessagingResponse
-from functions import verify_number, update_list, ask, append_interaction_to_chat_log, trim_chat_log
+from functions import verify_number, update_list, ask, create_msg_object, trim_messages, set_system
 
 #code for the whole web app is nested within the chatgpt function
 app = Flask(__name__)
