@@ -5,7 +5,7 @@ from functions import verify_number, update_list, ask, create_msg_object, trim_m
 #code for the whole web app is nested within the chatgpt function
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'hgtgniser5443'
+app.config['SECRET_KEY'] = 'couldbeanythinghere'
 
 greetings = ['hey', 'hello', 'hi', 'hey!', 'hello!', 'hi!', 'hi pocketgpt',
              'hey pocketgpt', 'hello pocketgpt', 'hi pocketgpt!',
