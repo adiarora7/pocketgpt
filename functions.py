@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 
 load_dotenv()
 
-openai.api_key = "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"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 session_prompt =  {"role":"system", "content": "You are a helpful assistant."}
 initial_user = {"role": "user", "content": "Who won the world series in 2020?"}
