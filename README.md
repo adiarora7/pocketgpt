@@ -5,7 +5,7 @@ PocketGPT is a sms-chatbot driven by GPT-3.5. It allows for instant answers via 
 **Acquired 30+ users** in the first day, who collectively logged **over 3000 interactions** with the service.
 
 <p align="center">
-  <img src="./images/pocketgpt-preview.jpg" alt="Project Preview" width="738">
+  <img src="./images/pocketgpt-preview.jpg" alt="Project Preview" width="524">
 </p>
 
 
